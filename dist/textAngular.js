@@ -675,7 +675,7 @@ function($document, taDOM){
 			};
 		}
 	};
-	var className = function (object) {
+	var nativeClassName = function (object) {
 		return Object.prototype.toString.call(object);
 	};
 	var api = {
@@ -865,14 +865,9 @@ function($document, taDOM){
  			var range = rangy.getSelection().getRangeAt(0);
  			var node = range.createContextualFragment(htmlString);
 			var parent = range.commonAncestorContainer; 
-			var parentIsText = className(parent) === '[object Text]';
+			var parentIsText = nativeClassName(parent) === '[object Text]';
 			var outerHTML = parentIsText ? parent.parentNode.outerHTML : parent.outerHTML;
 			var innerHTML = parentIsText ? parent.parentNode.innerHTML : parent.innerHTML;
-
-			console.log(range);
-			console.log(outerHTML);
-			console.log(innerHTML);
-			console.log(htmlString);
  
  			if (range.toString().length && outerHTML.replace(innerHTML, '') !== htmlString) {
  				range.surroundContents(node.firstChild);
