@@ -444,10 +444,12 @@ function($document, taDOM){
 		surroundSelection: function(htmlString) {
  			var range = rangy.getSelection().getRangeAt(0);
  			var node = range.createContextualFragment(htmlString);
+			var outerHTML = range.commonAncestorContainer.outerHTML;
+			var innerHTML = range.commonAncestorContainer.innerHTML;
  
- 			if (range.commonAncestorContainer.outerHTML.replace(range.commonAncestorContainer.innerHTML, '') !== htmlString) {
+ 			if (range.toString().length && outerHTML.replace(innerHTML, '') !== htmlString) {
  				range.surroundContents(node.firstChild);
- 			} else {
+ 			} else if (outerHTML.replace(innerHTML, '') === htmlString) {
  				var oldInnerHTML = range.commonAncestorContainer.innerHTML;
  				angular.element(api.getSelection().container).remove();
  				api.insertHtml(oldInnerHTML);
