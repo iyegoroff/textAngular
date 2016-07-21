@@ -1742,11 +1742,6 @@ function($document, taDOM){
 			var parentIsText = nativeClassName(parent) === '[object Text]';
 			var outerHTML = parentIsText ? parent.parentNode.outerHTML : parent.outerHTML;
 			var innerHTML = parentIsText ? parent.parentNode.innerHTML : parent.innerHTML;
-
-			console.log(range);
-			console.log(outerHTML);
-			console.log(innerHTML);
-			console.log(htmlString);
  
  			if (range.toString().length && outerHTML.replace(innerHTML, '') !== htmlString) {
 				 try {
