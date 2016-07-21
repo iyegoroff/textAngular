@@ -868,13 +868,20 @@ function($document, taDOM){
 			var parentIsText = nativeClassName(parent) === '[object Text]';
 			var outerHTML = parentIsText ? parent.parentNode.outerHTML : parent.outerHTML;
 			var innerHTML = parentIsText ? parent.parentNode.innerHTML : parent.innerHTML;
+
+			console.log(range);
+			console.log(outerHTML);
+			console.log(innerHTML);
+			console.log(htmlString);
  
  			if (range.toString().length && outerHTML.replace(innerHTML, '') !== htmlString) {
- 				range.surroundContents(node.firstChild);
+				 try {
+					 range.surroundContents(node.firstChild);
+				 } catch (e) {
+				 }
  			} else if (outerHTML.replace(innerHTML, '') === htmlString) {
- 				var oldInnerHTML = range.commonAncestorContainer.innerHTML;
- 				angular.element(api.getSelection().container).remove();
- 				api.insertHtml(oldInnerHTML);
+ 				 angular.element(api.getSelection().container).remove();
+ 				 api.insertHtml(innerHTML);
  			}
 		}
 	};
